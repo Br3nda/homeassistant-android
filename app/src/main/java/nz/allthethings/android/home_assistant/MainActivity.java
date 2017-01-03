@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import HomeAssistant.HomeAssistantService;
 import io.realm.Realm;
-
+import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
     private Realm realm;
     @Override
@@ -20,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(this);
         // Create the Realm instance
         realm = Realm.getDefaultInstance();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.github.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        HomeAssistantService service = retrofit.create(HomeAssistantService.class);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
