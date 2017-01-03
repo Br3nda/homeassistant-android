@@ -9,11 +9,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import io.realm.Realm;
 
+public class MainActivity extends AppCompatActivity {
+    private Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Realm.init(this);
+        // Create the Realm instance
+        realm = Realm.getDefaultInstance();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
